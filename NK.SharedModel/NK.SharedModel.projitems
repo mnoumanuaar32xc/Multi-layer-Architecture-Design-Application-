@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>153b9282-0cb4-4382-b44a-952e7a96543a</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>NK.SharedModel</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)enum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ErrorModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResponseStatusModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GenericResponseModel.cs" />
+  </ItemGroup>
+</Project>

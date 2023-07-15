@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NK.Api", "NK.Api\NK.Api.csproj", "{F16E17A1-6B96-48AC-959C-ADBC0F3342E2}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NK.SharedModel", "NK.SharedModel\NK.SharedModel.shproj", "{153B9282-0CB4-4382-B44A-952E7A96543A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NK.Model", "NK.Model\NK.Model.csproj", "{BD242A06-87D6-4C7C-A67B-50EFE1DF00B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NK.Infrastructure", "NK.Infrastructure\NK.Infrastructure.csproj", "{0807F581-4C83-4EF1-897A-BCC8E245012A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NK.Repository", "NK.Repository\NK.Repository.csproj", "{A243038B-D227-433E-95BD-7F89984C107C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F16E17A1-6B96-48AC-959C-ADBC0F3342E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F16E17A1-6B96-48AC-959C-ADBC0F3342E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F16E17A1-6B96-48AC-959C-ADBC0F3342E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F16E17A1-6B96-48AC-959C-ADBC0F3342E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD242A06-87D6-4C7C-A67B-50EFE1DF00B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD242A06-87D6-4C7C-A67B-50EFE1DF00B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD242A06-87D6-4C7C-A67B-50EFE1DF00B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD242A06-87D6-4C7C-A67B-50EFE1DF00B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0807F581-4C83-4EF1-897A-BCC8E245012A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0807F581-4C83-4EF1-897A-BCC8E245012A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0807F581-4C83-4EF1-897A-BCC8E245012A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0807F581-4C83-4EF1-897A-BCC8E245012A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A243038B-D227-433E-95BD-7F89984C107C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A243038B-D227-433E-95BD-7F89984C107C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A243038B-D227-433E-95BD-7F89984C107C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A243038B-D227-433E-95BD-7F89984C107C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F841AB0-5822-44A3-A94E-2209DD5FBEFE}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NK.SharedModel\NK.SharedModel.projitems*{153b9282-0cb4-4382-b44a-952e7a96543a}*SharedItemsImports = 13
+		NK.SharedModel\NK.SharedModel.projitems*{bd242a06-87d6-4c7c-a67b-50efe1df00b5}*SharedItemsImports = 5
+		NK.SharedModel\NK.SharedModel.projitems*{f16e17a1-6b96-48ac-959c-adbc0f3342e2}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal
