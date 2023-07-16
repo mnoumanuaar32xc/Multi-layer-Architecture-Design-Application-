@@ -11,6 +11,13 @@ namespace NK.SharedModel
         public bool IsSuccess { get; set; } = false;
         public List<string> references { get; set; } = new List<string>();
         public List<ErrorModel> Errors { get; set; } = new List<ErrorModel>();
+        public Token Tokens { get; set; } = new Token();
+
+        public class Token
+        {
+
+             public string TokenValue { get; set; }
+        }
 
         public void SetAsSuccess()
         {

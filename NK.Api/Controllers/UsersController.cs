@@ -1,23 +1,30 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Abstractions;
+using Microsoft.IdentityModel.Tokens;
 using NK.Infrastructure;
 using NK.Model.DBModel;
 using NK.Model.RequestModel;
 using NK.Model.ResponseModel;
 using NK.SharedModel;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace NK.Api.Controllers
 {
+
     //[Route("api/[controller]")]
     //[ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IServices _services;
-
-        public UsersController(IServices services)
+        private readonly IConfiguration _configuration;
+        public UsersController(IServices services, IConfiguration configuration)
         {
             _services = services;
-
+            _configuration = configuration; 
         }
 
         [HttpGet("Test")]
@@ -57,12 +64,34 @@ namespace NK.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("Login")]
-        public async Task<GenericResponseModel> login(string userName,string password)
+        public async Task<GenericResponseModel> login([FromBody]  UserRequestModel.Login model)
         {
             GenericResponseModel response = new();
-            if (userName == "nouman" && password == "123")
+            if (model.UserName == "nouman" && model.Password == "123")
             { 
             }
+            //create claims details based on the user information
+            var claims = new[] {
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim("UserId", "01"),
+                        new Claim("DisplayName", model.UserName),
+                        new Claim("UserName",model.UserName),
+                        new Claim("Email", "nouman@sme.gov.om")
+                    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddMinutes(10),
+                signingCredentials: signIn);
+
+            response.ResponseStatus.Tokens.TokenValue=(new JwtSecurityTokenHandler().WriteToken(token));
+
+            response.ResponseStatus.IsSuccess = true;
 
                 return response;
 
