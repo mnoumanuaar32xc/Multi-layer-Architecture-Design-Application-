@@ -33,9 +33,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
             };
         });
+builder.Services.AddSingleton<NK.Infrastructure.ExceptionHandlingMiddleware>();
 
 
 var app = builder.Build();
+// Global Exception Handling
+// Register the custom middleware
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

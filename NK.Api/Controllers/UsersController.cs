@@ -26,7 +26,7 @@ namespace NK.Api.Controllers
             _services = services;
             _configuration = configuration; 
         }
-
+        [AllowAnonymous]
         [HttpGet("Test")]
         public IActionResult Get()
         {
@@ -35,6 +35,10 @@ namespace NK.Api.Controllers
             response.ResponseStatus.SetAsSuccess();
             response.ResponseStatus.Message = "NK Api is Alive";
             response.ResponseStatus.IsSuccess = true;
+
+            throw new CustomExceptions("Product not found.");
+
+
             return Ok(response);
 
         }
