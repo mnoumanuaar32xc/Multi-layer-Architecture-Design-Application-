@@ -9,9 +9,11 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NK.SharedModel", "NK.Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NK.Model", "NK.Model\NK.Model.csproj", "{BD242A06-87D6-4C7C-A67B-50EFE1DF00B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NK.Infrastructure", "NK.Infrastructure\NK.Infrastructure.csproj", "{0807F581-4C83-4EF1-897A-BCC8E245012A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NK.Infrastructure", "NK.Infrastructure\NK.Infrastructure.csproj", "{0807F581-4C83-4EF1-897A-BCC8E245012A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NK.Repository", "NK.Repository\NK.Repository.csproj", "{A243038B-D227-433E-95BD-7F89984C107C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NK.Repository", "NK.Repository\NK.Repository.csproj", "{A243038B-D227-433E-95BD-7F89984C107C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NK.UnitTest", "NK.UnitTest\NK.UnitTest.csproj", "{DDE62C53-7037-4EED-8F16-00ACFFACD63E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{A243038B-D227-433E-95BD-7F89984C107C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A243038B-D227-433E-95BD-7F89984C107C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A243038B-D227-433E-95BD-7F89984C107C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE62C53-7037-4EED-8F16-00ACFFACD63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE62C53-7037-4EED-8F16-00ACFFACD63E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE62C53-7037-4EED-8F16-00ACFFACD63E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE62C53-7037-4EED-8F16-00ACFFACD63E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,6 +19,13 @@ namespace NK.Infrastructure
             return users;
         }
 
+        public async Task<long> User_AddUpdate(Users model)
+        {
+            long ReturnId = 0;
+
+            ReturnId =await _userRepository.AddUpdateAsync(model);
+            return ReturnId;
+        }
 
 
     }

@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Abstractions;
 using Microsoft.IdentityModel.Tokens;
 using NK.Infrastructure;
 using NK.Model.DBModel;
-using NK.Model.RequestModel;
-using NK.Model.ResponseModel;
 using NK.SharedModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,9 +11,11 @@ using System.Text;
 namespace NK.Api.Controllers
 {
 
-    //[Route("api/[controller]")]
+    [Route("api/[controller]")]
     //[ApiController]
     [Authorize]
+    //[ServiceFilter(typeof(LoggingActionFilter))] 
+     
     public class UsersController : ControllerBase
     {
         private readonly IServices _services;
@@ -31,12 +30,20 @@ namespace NK.Api.Controllers
         public IActionResult Get()
         {
             GenericResponseModel response = new();
+            try
+            {
+                response.ResponseStatus.SetAsSuccess();
+                response.ResponseStatus.Message = "NK Api is Alive";
+                response.ResponseStatus.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
 
-            response.ResponseStatus.SetAsSuccess();
-            response.ResponseStatus.Message = "NK Api is Alive";
-            response.ResponseStatus.IsSuccess = true;
+                throw new CustomExceptions(ex.Message);
+                
+            }
+            
 
-            throw new CustomExceptions("Product not found.");
 
 
             return Ok(response);
@@ -102,6 +109,38 @@ namespace NK.Api.Controllers
 
 
         }
+
+        [AllowAnonymous]
+        [HttpPost("AddUpdateAsync")]
+        public async Task<UserResponseModel.User_AddUpdate> AddUpdateAsync([FromBody] UserRequestModel.User_AddUpdate model)
+        {
+
+            UserResponseModel.User_AddUpdate response = new();
+            try
+            {
+
+                response.ReturnId = await _services.User_AddUpdate(model.User);
+                response.ResponseStatus.SetAsSuccess();
+                response.ResponseStatus.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+                response.ReturnId = 0;
+                response.ResponseStatus.SetAsFailed(ex.Message);
+                response.ResponseStatus.IsSuccess = false;
+
+            }
+
+            return response;
+
+
+
+
+        }
+
+
+
 
     }
 }

@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace NK.Repository
 {
-    public interface IUsersRepository
+    public interface ITasksRepository
     {
-        public List<Users> GetUserById(int id);
-        Task<long> AddUpdateAsync(Users model);
+        public Task<long> AddUpdateAsync(Tasks model);
 
-        bool UpdateAsync(Users model);
     }
 }

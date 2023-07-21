@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NK.Model.RequestModel
+namespace NK.Model.DBModel
 {
     public class UserRequestModel
     {
@@ -18,6 +18,11 @@ namespace NK.Model.RequestModel
         {
             public string UserName { get; set; }
             public string  Password { get; set; }
+        }
+        public class User_AddUpdate
+        {
+            public Users  User { get; set; }
+
         }
     }
 }

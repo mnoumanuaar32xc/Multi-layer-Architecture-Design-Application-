@@ -34,6 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             };
         });
 builder.Services.AddSingleton<NK.Infrastructure.ExceptionHandlingMiddleware>();
+ 
 
 
 var app = builder.Build();

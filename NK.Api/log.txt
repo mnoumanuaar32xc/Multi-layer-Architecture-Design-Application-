@@ -1,0 +1,11 @@
+GET /api/Users/Test
+200 200Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream
+GET /api/Users/Test
+200 200Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream
+GET /api/Users/Test
+200 200Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream
+POST /api/Users/Login
+POST /api/Users/Login
+POST /api/Users/Login
+POST /api/Users/Login
+POST /api/Users/Login
