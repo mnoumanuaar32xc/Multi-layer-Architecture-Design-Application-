@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using NK.Api.Controllers;
 using NK.Model.DBModel;
+using NUnit.Framework.Interfaces;
 using Xunit;
 using static NK.Model.DBModel.UserRequestModel;
 
@@ -49,6 +50,29 @@ namespace NK.UnitTest
 
             //Assert.Pass();
         }
+        [Test]
+        public void Login()
+        {
+            UserRequestModel.Login model = new();
+            model.UserName = "Nouman";
+            model.Password = "123";
 
+            string output = JsonConvert.SerializeObject(model);
+
+
+        }
+
+
+        [Test]
+        public void SearchTasks()
+        {
+            TaskRequestModel.Search model = new();
+            model.UserId = 0;
+            model.TaskId = 0;
+            model.TaskTypeId = 0;
+            
+            string output = JsonConvert.SerializeObject(model);
+
+        }
     }
 }

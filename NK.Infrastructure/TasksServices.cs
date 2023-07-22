@@ -29,7 +29,7 @@ namespace NK.Infrastructure
         {
             throw new NotImplementedException();
         }
-        public async Task<List<TasksExtended>> GetTasksExtendedDetailsAsync(TaskRequestModel.Search model)
+        public async Task<List<TasksExtended>> Search(TaskRequestModel.Search model)
         {
             List<TasksExtended> result= new List<TasksExtended>();
             result=await _tasksRepository.GetTasksExtendedDetailsAsync(model.UserId, model.TaskId, model.TaskTypeId);

@@ -74,15 +74,14 @@ namespace NK.Api.Controllers
 
         }
 
-
-
-        public async Task<TaskResponseModel.TaskSearch> GetTasksExtendedDetailsAsync([FromBody] TaskRequestModel.Search model)
+        [HttpPost("Search")]
+                public async Task<TaskResponseModel.TaskSearch> Search([FromBody] TaskRequestModel.Search model)
         {
             TaskResponseModel.TaskSearch response = new();
             try
             {
 
-                response.Tasks = await _services.GetTasksExtendedDetailsAsync(model);
+                response.Tasks = await _services.Search(model);
                 response.ResponseStatus.SetAsSuccess();
                 response.ResponseStatus.IsSuccess = true;
             }

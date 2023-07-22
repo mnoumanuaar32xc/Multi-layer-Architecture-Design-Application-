@@ -71,7 +71,6 @@ namespace NK.Repository
                         return tasks;
                     },
                     p,
-                    splitOn: "DEF_tasksTypeID,UserID",
                     commandType: CommandType.StoredProcedure
                                     );
                 await connection.CloseAsync();
