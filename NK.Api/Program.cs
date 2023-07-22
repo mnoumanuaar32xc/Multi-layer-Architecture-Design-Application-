@@ -13,8 +13,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IServices, UserServices>();
+
+///We are adding these lines of code in the program.cs file because it is the entry point of the application and the ConfigureServices method is where we configure the dependency injection container. By adding these lines of code, we are registering the implementations of various interfaces with the dependency injection container. This allows us to easily access and use these implementations throughout our application. For example, by registering the UserServices class with the IUserServices interface, we can easily inject an instance of IUserServices into our controllers or other classes that depend on it. This makes it easier to write clean, modular, and testable code.
+builder.Services.AddTransient<IUserServices, UserServices>();
+builder.Services.AddTransient<ITasksServices, TasksServices>();
+
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+builder.Services.AddTransient<ITasksRepository, TasksRepository>();
 
 
 // Configure JWT authentication

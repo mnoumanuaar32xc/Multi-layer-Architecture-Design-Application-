@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace NK.Infrastructure
 {
-    public class TasksServices
+    public class TasksServices:ITasksServices
     {
-
-
         private ITasksRepository _tasksRepository;
         public TasksServices(ITasksRepository tasksRepository)
         {
             _tasksRepository = tasksRepository;
         }
+         
 
         public async Task<long> Task_AddUpdate(Tasks model)
         {
@@ -26,5 +25,15 @@ namespace NK.Infrastructure
             return ReturnId;
         }
 
+        public Task<long> User_AddUpdate(Users model)
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<List<TasksExtended>> GetTasksExtendedDetailsAsync(TaskRequestModel.Search model)
+        {
+            List<TasksExtended> result= new List<TasksExtended>();
+            result=await _tasksRepository.GetTasksExtendedDetailsAsync(model.UserId, model.TaskId, model.TaskTypeId);
+            return result;
+        }
     }
 }

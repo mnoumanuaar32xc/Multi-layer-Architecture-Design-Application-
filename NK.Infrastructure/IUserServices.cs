@@ -2,10 +2,9 @@
 
 namespace NK.Infrastructure
 {
-    public interface IServices
+    public interface IUserServices
     {
         Task<List<Users>> GetUserById(int id);
-
         Task<long> User_AddUpdate(Users model);
     }
 }

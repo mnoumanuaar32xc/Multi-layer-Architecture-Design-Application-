@@ -29,5 +29,26 @@ namespace NK.UnitTest
 
             //Assert.Pass();
         }
+
+
+        [Test]
+        public void Task_AddUpdateAsync()
+        {
+            //        
+
+            TaskRequestModel.Task_AddUpdate model = new TaskRequestModel.Task_AddUpdate();
+            Tasks task = new Tasks();
+            task.Title = "Project 1";
+            task.Detail = "Project 1 Details ";
+            task.UserID= 1;
+            task.TaskTypeID = 1;
+           
+            
+            model.Task = task;
+            string output = JsonConvert.SerializeObject(model);
+
+            //Assert.Pass();
+        }
+
     }
 }

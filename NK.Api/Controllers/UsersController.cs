@@ -18,9 +18,9 @@ namespace NK.Api.Controllers
      
     public class UsersController : ControllerBase
     {
-        private readonly IServices _services;
+        private readonly IUserServices _services;
         private readonly IConfiguration _configuration;
-        public UsersController(IServices services, IConfiguration configuration)
+        public UsersController(IUserServices services, IConfiguration configuration)
         {
             _services = services;
             _configuration = configuration; 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NK.Infrastructure;
+using NK.Model.DBModel;
 using NK.SharedModel;
 
 namespace NK.Api.Controllers
@@ -11,9 +12,9 @@ namespace NK.Api.Controllers
     [Authorize]
     public class TasksController : ControllerBase
     {
-        private readonly IServices _services;
+        private readonly ITasksServices _services;
         private readonly IConfiguration _configuration;
-        public TasksController(IServices services, IConfiguration configuration)
+        public TasksController(ITasksServices services, IConfiguration configuration)
         {
             _services = services;
             _configuration = configuration;
@@ -43,6 +44,58 @@ namespace NK.Api.Controllers
 
         }
 
+
+        [AllowAnonymous]
+        [HttpPost("AddUpdateAsync")]
+        public async Task<TaskResponseModel.Task_AddUpdate> AddUpdateAsync([FromBody] TaskRequestModel.Task_AddUpdate model)
+        {
+
+            TaskResponseModel.Task_AddUpdate response = new();
+            try
+            {
+
+                response.ReturnId = await _services.Task_AddUpdate(model.Task);
+                response.ResponseStatus.SetAsSuccess();
+                response.ResponseStatus.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+
+                response.ReturnId = 0;
+                response.ResponseStatus.SetAsFailed(ex.Message);
+                response.ResponseStatus.IsSuccess = false;
+
+            }
+
+            return response;
+
+
+
+
+        }
+
+
+
+        public async Task<TaskResponseModel.TaskSearch> GetTasksExtendedDetailsAsync([FromBody] TaskRequestModel.Search model)
+        {
+            TaskResponseModel.TaskSearch response = new();
+            try
+            {
+
+                response.Tasks = await _services.GetTasksExtendedDetailsAsync(model);
+                response.ResponseStatus.SetAsSuccess();
+                response.ResponseStatus.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseStatus.SetAsFailed(ex.Message);
+                response.ResponseStatus.IsSuccess = false;
+            }
+            return response;
+
+
+
+        }
 
     }
 }

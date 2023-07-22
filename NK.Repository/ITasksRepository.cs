@@ -10,6 +10,7 @@ namespace NK.Repository
     public interface ITasksRepository
     {
         public Task<long> AddUpdateAsync(Tasks model);
+        Task<List<TasksExtended>> GetTasksExtendedDetailsAsync(long userId, long taskId, int taskTypeId);
 
     }
 }

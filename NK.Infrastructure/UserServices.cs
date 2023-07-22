@@ -3,7 +3,7 @@ using NK.Repository;
 
 namespace NK.Infrastructure
 {
-    public class UserServices : IServices
+    public class UserServices : IUserServices
     {
 
         private IUsersRepository _userRepository;
@@ -19,6 +19,7 @@ namespace NK.Infrastructure
             return users;
         }
 
+    
         public async Task<long> User_AddUpdate(Users model)
         {
             long ReturnId = 0;
@@ -27,6 +28,11 @@ namespace NK.Infrastructure
             return ReturnId;
         }
 
+
+        public Task<long> Task_AddUpdate(Tasks model)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
