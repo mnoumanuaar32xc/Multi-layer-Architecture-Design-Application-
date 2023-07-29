@@ -22,6 +22,12 @@ builder.Services.AddTransient<IUsersRepository, UsersRepository>();
 builder.Services.AddTransient<ITasksRepository, TasksRepository>();
 
 
+// Memory Cache
+builder.Services.AddMemoryCache();
+
+
+
+
 // Configure JWT authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

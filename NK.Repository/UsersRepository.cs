@@ -20,6 +20,7 @@ namespace NK.Repository
 
         public List<Users> GetUserById(int id)
         {
+            constr = _configuration.GetConnectionString("DapperConnection");
 
             var sql = "SELECT * FROM Users WHERE ID = @Id";
             using (var connection = new SqlConnection(constr))

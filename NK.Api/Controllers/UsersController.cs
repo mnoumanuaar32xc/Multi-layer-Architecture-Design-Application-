@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using NK.Infrastructure;
 using NK.Model.DBModel;
@@ -15,15 +17,19 @@ namespace NK.Api.Controllers
     //[ApiController]
     [Authorize]
     //[ServiceFilter(typeof(LoggingActionFilter))] 
-     
+
     public class UsersController : ControllerBase
     {
         private readonly IUserServices _services;
         private readonly IConfiguration _configuration;
-        public UsersController(IUserServices services, IConfiguration configuration)
+        private readonly IMemoryCache _cache;
+        private const string _cacheKey = "abc123";
+        //  public UserResponseModel.GetUser response = new();
+        public UsersController(IUserServices services, IConfiguration configuration, IMemoryCache cache)
         {
             _services = services;
-            _configuration = configuration; 
+            _configuration = configuration;
+            _cache = cache;
         }
         [AllowAnonymous]
         [HttpGet("Test")]
@@ -40,9 +46,9 @@ namespace NK.Api.Controllers
             {
 
                 throw new CustomExceptions(ex.Message);
-                
+
             }
-            
+
 
 
 
@@ -53,19 +59,40 @@ namespace NK.Api.Controllers
         [HttpPost("GetUserById")]
         public async Task<UserResponseModel.GetUser> GetUserById([FromBody] UserRequestModel.GetUser model)
         {
-            UserResponseModel.GetUser response = new();
-            try
-            {
+            //Sliding Expiration - If no requests are made for 10 seconds, the data will be cleared in the In-Memory cache.
+            //Absolute Expiration - is the value defining for how long the cached data shold live, no matter how many times the data is requested.
 
-                response.Users = await _services.GetUserById(model.ID);
-                response.ResponseStatus.SetAsSuccess();
-                response.ResponseStatus.IsSuccess = true;
+            if (!_cache.TryGetValue(CacheKeys.Users, out UserResponseModel.GetUser response))
+            {
+                try
+                {
+                    response = new();
+                    response.Users = await _services.GetUserById(model.ID);
+                    response.ResponseStatus.SetAsSuccess();
+                    response.ResponseStatus.IsSuccess = true;
+                    var cacheEntryOptions = new MemoryCacheEntryOptions
+                    {
+                        AbsoluteExpiration = DateTime.Now.AddMinutes(5),
+                        SlidingExpiration = TimeSpan.FromMinutes(2),
+                        Size = 1024,
+                    };
+                    _cache.Set(CacheKeys.Users, response, cacheEntryOptions);
+                }
+                catch (Exception ex)
+                {
+                    response.ResponseStatus.SetAsFailed(ex.Message);
+                    response.ResponseStatus.IsSuccess = false;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                response.ResponseStatus.SetAsFailed(ex.Message);
-                response.ResponseStatus.IsSuccess = false;
+                if (model.ID != response.Users[0].ID)
+                {
+                    response.Users = await _services.GetUserById(model.ID);
 
+                }
+                
+                response.ResponseStatus.IsMemory = true;
             }
 
             return response;
@@ -75,11 +102,11 @@ namespace NK.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("Login")]
-        public async Task<GenericResponseModel> login([FromBody]  UserRequestModel.Login model)
+        public async Task<GenericResponseModel> login([FromBody] UserRequestModel.Login model)
         {
             GenericResponseModel response = new();
             if (model.UserName == "nouman" && model.Password == "123")
-            { 
+            {
             }
             //create claims details based on the user information
             var claims = new[] {
@@ -100,11 +127,11 @@ namespace NK.Api.Controllers
                 expires: DateTime.UtcNow.AddMinutes(10),
                 signingCredentials: signIn);
 
-            response.ResponseStatus.Tokens.TokenValue=(new JwtSecurityTokenHandler().WriteToken(token));
+            response.ResponseStatus.Tokens.TokenValue = (new JwtSecurityTokenHandler().WriteToken(token));
 
             response.ResponseStatus.IsSuccess = true;
 
-                return response;
+            return response;
 
 
 

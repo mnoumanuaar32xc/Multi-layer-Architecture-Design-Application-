@@ -9,8 +9,11 @@ namespace NK.SharedModel
     {
         public string Message { get; set; } = "";
         public bool IsSuccess { get; set; } = false;
+        public bool IsMemory { get; set; }=false;   
         public List<string> references { get; set; } = new List<string>();
         public List<ErrorModel> Errors { get; set; } = new List<ErrorModel>();
+
+
         public Token Tokens { get; set; } = new Token();
 
         public class Token
